@@ -2,7 +2,7 @@ Configuration SqlServerConfiguration
 {
   [CmdletBinding()]
   param (
-    # Parameter help description
+    # The source path to use, usually the path the installation media was extracted to
     [Parameter(Mandatory = $true)]
     [ValidateNotNullorEmpty()]
     [String]
