@@ -32,3 +32,5 @@ Configuration SqlServerConfiguration
     }
   }
 }
+
+SqlServerConfiguration  -SourcePath $SourcePath -OutputPath .\SqlServerConfiguration\
