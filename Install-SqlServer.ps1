@@ -15,8 +15,8 @@ function Install-SqlServer {
   )
 
   begin {
-    New-Item -Path $SourcePath -ItemType Directory
-    Copy-Item -Path (Join-Path -Path (Get-PSDrive -Name ((Mount-DiskImage -ImagePath $ImagePath -PassThru) | Get-Volume).DriveLetter).Root -ChildPath '*') -Destination $SourcePath -Recurse
+    New-Item -Path $SourcePath -ItemType Directory -force
+    Copy-Item -Path (Join-Path -Path (Get-PSDrive -Name ((Mount-DiskImage -ImagePath $ImagePath -PassThru) | Get-Volume).DriveLetter).Root -ChildPath '*') -Destination $SourcePath -Recurse -force
     Dismount-DiskImage -ImagePath $ImagePath
 
     # Ensure NuGet package provider is present
@@ -39,10 +39,10 @@ function Install-SqlServer {
   end {
     if (Test-DscConfiguration) {
       Write-Host 'Removing configuration directory...'
-      Remove-Item .\SqlServerConfiguration -Recurse
+      Remove-Item .\SqlServerConfiguration -Recurse -force
 
       Write-Host 'Removing extract directory...'
-      Remove-Item $SourcePath -Recurse
+      Remove-Item $SourcePath -Recurse -force
 
       Write-Host 'Done.'
     }
